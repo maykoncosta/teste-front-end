@@ -1,0 +1,76 @@
+table {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #F7F7F7;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.toggle-btn {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+tr {
+    border-radius: 20px;
+    background: #222;
+    display: flex;
+    border: 1px solid #F7F7F7;
+}
+
+.edit-btn,
+.delete-btn {
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.delete-btn{
+    color: #D90A0A;
+}
+
+.score {
+    border-radius: 15px;
+    background: #FFF;
+    width: 20%;
+    text-align: center;
+    height: 21px;
+    color: #222222;
+    min-width: 60px;
+    max-width: 80px;
+}
+
+.force-pass-level-1, .force-pass-level-2, .force-pass-level-3, .force-pass-level-4{
+    width: 25%;
+    text-align: center;
+    height: 21px;
+    min-width: 80px;
+    border-radius: 15px;
+} 
+.force-pass-level-1 {
+    background: #FF4747;
+}
+
+.force-pass-level-2 {
+    background: #DED500;
+}
+
+.force-pass-level-3 {
+    background: #6EFF3A;
+}
+
+.force-pass-level-4 {
+    background: #03C622;
+}
+
+tbody{
+    width: 700px;
+    overflow: hidden;
+}

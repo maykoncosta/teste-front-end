@@ -39,6 +39,22 @@ task('app.assets', () => {
     return src('assets/**/*.*').pipe(dest('dist/assets'));
 });
 
+// task('img', () => {
+//     return src('src/assets/img/**/*')
+//         .pipe(imagemin([
+//             imagemin.gifsicle({ interlaced: true }),
+//             imagemin.jpegtran({ progressive: true }),
+//             imagemin.optipng({ optimizationLevel: 5 }),
+//             imagemin.svgo({
+//                 plugins: [
+//                     { removeViewBox: true },
+//                     { cleanupIDs: false }
+//                 ]
+//             })
+//         ]))
+//         .pipe(dest('dist/assets/img'));
+// });
+
 task('deps', () => {
     return src([
         'node_modules/angular/angular.min.js',
@@ -76,6 +92,10 @@ task('serverStart', () => {
         }));
 });
 
-exports.default = series('deps', 'env-dev', 
-                parallel('app.html', 'app.css', 'app.js', 'app.assets'), 
+task('clean', () => {
+    return del(['dist/**/*']);
+})
+
+exports.default = series('clean', 'deps', 'env-dev', 
+                parallel('app.html', 'app.css', 'app.js', 'app.assets',), 
                 'serverStart', 'watch');

@@ -1,6 +1,6 @@
 input,
 select {
-    width: 158px;
+    width: 200px;
     height: 35px;
     flex-shrink: 0;
     border-radius: 15px;
@@ -8,9 +8,14 @@ select {
     background: #FFF;
     margin-top: -10px;
     color: #23c4ac;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-
+select{
+    width: 220px;
+    height: 40px;
+}
 
 form {
     margin-top: 200px;
@@ -22,8 +27,6 @@ form {
 }
 
 label {
-    width: 149px;
-    height: 34px;
     color: #FA8500;
     margin-top: 20px;
     font-family: Montserrat;
@@ -36,8 +39,8 @@ label {
 button {
     border-radius: 15px;
     background: #FA8500;
-    width: 158px;
-    height: 34px;
+    width: 140px;
+    height: 40px;
     color: #FFF5F5;
     font-family: Montserrat;
     font-size: 20px;
@@ -47,6 +50,18 @@ button {
     border: 0;
 }
 
-input .ng-pristine{
-    color: black;
+.form-buttons{
+    
+}
+
+.custom-form{
+    display: flex;
+    margin-top: 100px;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.form-input{
+    margin: 10px;
 }

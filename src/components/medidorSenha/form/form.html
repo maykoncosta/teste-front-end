@@ -1,19 +1,24 @@
 <div class="custom-form">
-  <label for="nome">Nome:</label>
-  <input type="text" id="nome" ng-model="formData.nome" required>
+  <div class="form-input">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" ng-model="formData.nome" required>
+  </div>
 
-  <label for="senha">Senha:</label>
-  <input type="password" id="senha" ng-model="formData.senha" required>
-
-  <label for="cargo">Cargo:</label>
-  <select id="cargo" ng-model="formData.cargo" required>
-    <option value="developer">Desenvolvedor</option>
-    <option value="manager">Gerente</option>
-    <option value="designer">Designer</option>
-  </select>
+  <div class="form-input">
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" ng-model="formData.senha" required>
+  </div>
+  <div class="form-input">
+    <label for="cargo">Cargo:</label>
+    <select id="cargo" ng-model="formData.cargo" required>
+      <option value="developer">Desenvolvedor</option>
+      <option value="manager">Gerente</option>
+      <option value="designer">Designer</option>
+    </select>
+  </div>
 
   <br>
-  <div>
+  <div class="form-buttons">
     <button type="button" ng-click="gerarSenha()">Gerar Senha</button>
     <button type="submit" ng-click="submitForm()">Salvar</button>
   </div>
