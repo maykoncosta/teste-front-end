@@ -1,0 +1,52 @@
+input,
+select {
+    width: 158px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 1px solid #23C4AC;
+    background: #FFF;
+    margin-top: -10px;
+    color: #23c4ac;
+}
+
+
+
+form {
+    margin-top: 200px;
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+label {
+    width: 149px;
+    height: 34px;
+    color: #FA8500;
+    margin-top: 20px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+button {
+    border-radius: 15px;
+    background: #FA8500;
+    width: 158px;
+    height: 34px;
+    color: #FFF5F5;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: 0;
+}
+
+input .ng-pristine{
+    color: black;
+}

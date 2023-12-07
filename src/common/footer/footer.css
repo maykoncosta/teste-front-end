@@ -1,0 +1,25 @@
+
+.footer-component{
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    width: 105%;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: #222;
+    margin-left: -20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.text-footer{
+    color: #23C4AC;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
