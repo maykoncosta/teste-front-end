@@ -1,17 +1,29 @@
+<!-- form -->
 <div class="custom-form">
-  <div class="form-input">
-    <label for="name">Nome:</label>
-    <input type="text" id="name" ng-model="ctrl.formData.name" required>
+  <div class="form-input" ng-show="ctrl.showLeadInput">
+      <label for="lead">Superior:</label>
+      <input type="text" id="lead" ng-model="ctrl.formData.lead"  readonly>
   </div>
 
   <div class="form-input">
-    <label for="password">Senha:</label>
-    <input type="text" id="password" ng-model="ctrl.formData.password" required>
+      <label for="name">Nome:</label>
+      <input type="text" id="name" ng-model="ctrl.formData.name" required>
+  </div>
+
+
+  <div class="form-input">
+      <label for="password">Senha:</label>
+      <input type="text" id="password" ng-model="ctrl.formData.password" required>
   </div>
 
   <br>
   <div class="form-buttons">
-    <button type="button" ng-click="generatedPassword()">Gerar Senha</button>
-    <button type="submit" ng-click="ctrl.submitForm()">Salvar</button>
+      <button type="button" ng-click="ctrl.generatedPassword()" class="button">Gerar Senha</button>
+      <button type="submit" ng-click="ctrl.submitForm()" class="button save">Salvar</button>
   </div>
 </div>
+
+<list-colaborators-app form-data="ctrl.formData" 
+  colaborators="ctrl.colaborators"
+  show-lead-input="ctrl.showLeadInput"
+></list-colaborators-app>

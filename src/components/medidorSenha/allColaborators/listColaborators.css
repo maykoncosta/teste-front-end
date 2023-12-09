@@ -1,59 +1,25 @@
-table {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: #F7F7F7;
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
-.toggle-btn {
-    cursor: pointer;
-    font-weight: bold;
-}
-
-tr {
-    border-radius: 20px;
-    background: #222;
-    display: flex;
-    border: 1px solid #F7F7F7;
-}
-
 .edit-btn,
 .delete-btn {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px !important;
     margin-right: 5px;
 }
 
-.delete-btn{
+.delete-btn {
     color: #D90A0A;
 }
 
-.score {
-    border-radius: 15px;
-    background: #FFF;
-    width: 20%;
+
+.force-pass-level-1,
+.force-pass-level-2,
+.force-pass-level-3,
+.force-pass-level-4 {
+    width: 85px;
     text-align: center;
     height: 21px;
-    color: #222222;
-    min-width: 60px;
-    max-width: 80px;
+    border-radius: 15px;
 }
 
-.force-pass-level-1, .force-pass-level-2, .force-pass-level-3, .force-pass-level-4{
-    width: 25%;
-    text-align: center;
-    height: 21px;
-    min-width: 80px;
-    border-radius: 15px;
-} 
 .force-pass-level-1 {
     background: #FF4747;
 }
@@ -70,7 +36,53 @@ tr {
     background: #03C622;
 }
 
-tbody{
-    width: 700px;
-    overflow: hidden;
+
+.score {
+    border-radius: 15px;
+    background-color: #FFF;
+    width: 70px;
+    text-align: center;
+    height: 21px;
+    color: #222222;
+}
+
+.hierarchy-tr {
+    justify-content: space-around;
+    align-items: center;
+    display: grid;
+    margin-top: 5px;
+}
+
+.hierarchy-dad {
+    background: #222;
+    border-radius: 20px;
+    padding: 10px;
+    min-width: 350px;
+    border-bottom: 1px solid;
+}
+
+.infos {
+    display: flex;
+    margin-left: 25%;
+    margin-top: -20px;
+    justify-content: space-around;
+}
+
+
+.toggle-btn {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+    color: #F7F7F7;
+}
+
+.hierarchy-son{
+    margin-left: -40px;
+}
+
+.hierarchy-tr li:hover {
+    background-color: #00000054; /* Ajuste a opacidade conforme necessário */
+    transition: background-color 0.3s ease;
 }

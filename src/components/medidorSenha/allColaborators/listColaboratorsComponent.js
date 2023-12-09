@@ -1,7 +1,8 @@
 angular.module('app').component('listColaboratorsApp', {
     bindings: {
-        employees: "<",
-        toggleSubordinates: "&",
+        formData:"=",
+        showLeadInput:"=",
+        colaborators: '<',
     },
     templateUrl: 'components/medidorSenha/allColaborators/listColaborators.html',
     controller: 'CommonController',

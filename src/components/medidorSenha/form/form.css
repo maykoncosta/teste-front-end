@@ -10,9 +10,10 @@ select {
     color: #23c4ac;
     padding-left: 10px;
     padding-right: 10px;
+    transition: all 0.3s ease-in-out; 
 }
 
-select{
+select {
     width: 220px;
     height: 40px;
 }
@@ -36,22 +37,46 @@ label {
     line-height: normal;
 }
 
+input:hover,
+select:hover {
+    border-color: #FFA84D; 
+}
+
+input:focus,
+select:focus {
+    outline: none; 
+    box-shadow: 0 0 5px rgba(35, 196, 172, 0.7); 
+}
+
 button {
+    cursor: pointer;
     border-radius: 15px;
     background: #FA8500;
     width: 140px;
     height: 40px;
     color: #FFF5F5;
-    font-family: Montserrat;
     font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
     border: 0;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
-.form-buttons{
-    
+.button:hover {
+    background: #FFA84D; /* Altere a cor para um tom ligeiramente diferente no hover */
+}
+
+.button:active {
+    background: #D56E00; /* Altere a cor quando o botão está pressionado */
+}
+
+.form-buttons {
+    text-align: center; /* Alinhe os botões ao centro */
+    margin-top: 20px; /* Adicione algum espaçamento superior para separar dos campos do formulário */
+}
+
+/* Estilização específica para o botão 'Salvar' */
+.button.save {
+    margin-left: 10px; /* Adicione margem à esquerda para separar dos outros botões */
 }
 
 .custom-form{

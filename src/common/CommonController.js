@@ -1,105 +1,134 @@
 angular
-    .module("app")
-    .controller("CommonController", [
-        "CommonService",
-        CommonController
-    ], );
+  .module("app")
+  .controller("CommonController", ["CommonService", CommonController]);
 
 function CommonController(CommonService) {
-    const vm = this;
-    vm.titleHeader = "MEDIR SENHAS DOS COLABORADORES"
-    vm.formData = {};
-    vm.colaborators = [];
+  const vm = this;
+  vm.titleHeader = "MEDIR SENHAS DOS COLABORADORES";
+  vm.formData = {};
+  vm.colaborators = [];
+  vm.showLeadInput = false;
 
-    vm.submitForm = function () {
-        vm.createColaborator(vm.formData);
-    };
-
-    vm.generatedPassword = function () {
-        vm.formData.password = CommonService.generatedPassword();
+  vm.submitForm = function () {
+    if (vm.formData.lead) {
+      vm.addSubordinate(vm.formData);
+    } else if (vm.formData.id) {
+      vm.updateColaborator(vm.formData.id, vm.formData);
+    } else {
+      vm.createColaborator(vm.formData);
     }
+  };
 
+  vm.generatedPassword = function () {
+    CommonService
+      .getGeneratedPass()
+      .then((response) => {
+        vm.formData.password = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    vm.employees = [
-        { id:'', name: 'João', score: '50%', forcePass: 'media',level: '2', subordinates: [
-            { id:'',name: 'Felipe', score: '60%', forcePass: 'bom',level: '3', subordinates: [
-                { id:'',name: 'Francisco', score: '93%', forcePass:'forte',level: '4', subordinates: [] },
-                { id:'',name: 'Steffane', score: '10%', forcePass: 'ruim',level: '1', subordinates: [] }
-            ], showSubordinates: false },
-            { id:'',name: 'Maria', score: '45%', forcePass:'media',level: '2',  subordinates: [] }
-        ], showSubordinates: false },
-        { id:'',name: 'Moisés', score: '10%', forcePass: 'ruim',level: '1', subordinates: [
-            { id:'',name: 'Carlos', score: '83%', forcePass:'forte',level: '4', subordinates: [] },
-            { id:'',name: 'Ana', score: '30%', forcePass: 'media',level: '2', subordinates: [] }
-        ], showSubordinates: false }
-    ];
+  vm.toggleSubordinates = function (colaborator) {
+    colaborator.showSubordinates = !colaborator.showSubordinates;
+  };
 
-    vm.toggleSubordinates = function (employee) {
-        console.log(employee);
-        employee.showSubordinates = !employee.showSubordinates;
+  vm.editColaborator = function (colaborator) {
+    vm.formData = angular.copy(colaborator);
+  };
+
+  vm.addSubordinate = function () {
+    const newSubordinate = {
+        name: vm.formData.name,
+        password: vm.formData.password,
     };
 
-    vm.editEmployee = function (employee) {
-        vm.formData.name = employee.name;
-        vm.formData.id = employee.id;
-        
-        console.log(vm.formData)
-      };
-  
-      vm.deleteEmployee = function (employee) {
-        console.log('Excluir:', employee);
-        // Implemente a lógica de exclusão aqui
-      };
+    const liderId = vm.formData.leadId;
+    const colaboratorLead = vm.colaborators.find(colaborator => colaborator.id === liderId);
 
-      vm.createColaborator = (colaboratorData) => {
-        CommonService
-          .createColaborator(colaboratorData)
-          .then((response) => {
-            vm.getColaborators();
-        })
-        .catch((error) => {
-            console.log(error);
-            console.log(response);
-          });
-      };
-    
-      vm.updateColaborator = (colaboratorId, colaboratorData) => {
-        CommonService
-          .updateColaborator(colaboratorId, colaboratorData)
-          .then((response) => {
-            vm.getColaborators();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
-    
-      vm.deleteColaborator = (colaboratorId) => {
-        CommonService
-          .deleteColaborator(colaboratorId)
-          .then((response) => {
-            vm.getColaborators();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
+    if (colaboratorLead) {
+      if(colaboratorLead.subordinates){
+        colaboratorLead.subordinates.push(newSubordinate);
+      }else{
+        colaboratorLead.subordinates = [newSubordinate];
+      }
 
-      vm.getColaborators = () => {
-        CommonService
-          .getAllColaborators()
-          .then((response) => {
-            vm.colaborators = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
+        vm.updateColaborator(colaboratorLead.id, colaboratorLead);
 
-      vm.init = () => {
+        vm.showSuperiorInput = false;
+        vm.formData.lead = '';
+        vm.formData.leadId = '';
+    } else {
+        console.log('Líder não encontrado.');
+    }
+};
+
+  vm.enableSubordinate = function (colaborator) {
+    vm.showLeadInput = true;
+    vm.formData.lead = colaborator.name;
+    vm.formData.leadId = colaborator.id;
+    console.log('aqui')
+  };
+
+  vm.deleteColaborator = function (colaborator) {
+    CommonService.deleteColaborator(colaborator.id)
+      .then(() => {
+        const index = vm.colaborators.indexOf(colaborator);
+
+        if (index !== -1) {
+          vm.colaborators.splice(index, 1);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  vm.createColaborator = function (colaboratorData) {
+    CommonService
+      .createColaborator(colaboratorData)
+      .then(() => {
         vm.getColaborators();
-      };
-    
-      vm.init();
+        vm.clearForm();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  vm.updateColaborator = function (colaboratorId, colaboratorData) {
+    CommonService
+      .updateColaborator(colaboratorId, colaboratorData)
+      .then(() => {
+        vm.getColaborators();
+        vm.clearForm();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  vm.clearForm = function () {
+    vm.formData = {};
+  };
+
+  vm.getColaborators = function () {
+    CommonService
+      .getAllColaborators()
+      .then((response) => {
+        console.log(response.data);
+        vm.colaborators = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  vm.init = function () {
+    vm.getColaborators();
+  };
+
+  vm.init();
 }
