@@ -1,3 +1,3 @@
 angular.module("app").constant("env", {
-    apiUrl: "",
+    apiUrl: "http://localhost:8080",
   });
