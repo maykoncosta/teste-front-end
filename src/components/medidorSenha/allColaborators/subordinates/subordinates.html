@@ -17,7 +17,7 @@
             <span class="buttons">
                 <i class="fa fa-edit edit-btn edit-btn" ng-click="ctrl.editColaborator(subordinate)" title="Editar"></i>
                 <i class="fa fa-plus enable-subordinate-btn" ng-click="ctrl.enableSubordinate(subordinate)" title="Adicionar Subordinado"></i>
-                <i class="fa fa-window-close-o delete-btn" ng-click="ctrl.deleteColaborator(subordinate)" title="Excluir"></i>
+                <i class="fa fa-window-close-o delete-btn" ng-show="subordinate.subordinates.length === 0" ng-click="ctrl.deleteColaborator(subordinate)" title="Excluir"></i>
             </span>
         </div>
         <ul class="hierarchy-son" ng-if="subordinate.showSubordinates">

@@ -18,7 +18,7 @@
                 <i class="fa fa-edit edit-btn edit-btn" ng-click="ctrl.editColaborator(colaborator)" title="Editar"></i>
                 <i class="fa fa-plus enable-subordinate-btn" ng-click="ctrl.enableSubordinate(colaborator)"
                     title="Adicionar Subordinado"></i>
-                <i class="fa fa-window-close-o delete-btn" ng-click="ctrl.deleteColaborator(colaborator)"
+                <i class="fa fa-window-close-o delete-btn" ng-show="colaborator.subordinates.length === 0" ng-click="ctrl.deleteColaborator(colaborator)"
                     title="Excluir"></i>
             </span>
         </div>

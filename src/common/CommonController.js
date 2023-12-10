@@ -61,18 +61,34 @@ function CommonController(CommonService) {
   };
 
   vm.deleteColaborator = function (colaborator) {
-    CommonService.deleteColaborator(colaborator.id)
-      .then(() => {
-        const index = vm.colaborators.indexOf(colaborator);
+    // Função recursiva para remover colaborador da árvore de subordinados
+    const removeColaboratorFromSubordinates = function (currentColaborator, colaboratorId) {
+        currentColaborator.subordinates = currentColaborator.subordinates.filter(subordinate => {
+            if (subordinate.id === colaboratorId) {
+                return false; // Remove o colaborador da lista de subordinados
+            } else {
+                // Chama recursivamente para verificar os subordinados do subordinado
+                removeColaboratorFromSubordinates(subordinate, colaboratorId);
+                return true;
+            }
+        });
+    };
 
-        if (index !== -1) {
-          vm.colaborators.splice(index, 1);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    // Remove o colaborador da lista principal
+    const index = vm.colaborators.indexOf(colaborator);
+    if (index !== -1) {
+        vm.colaborators.splice(index, 1);
+    }
+
+    // Chama a função recursiva para remover da árvore de subordinados dos outros colaboradores
+    vm.colaborators.forEach(otherColaborator => {
+        removeColaboratorFromSubordinates(otherColaborator, colaborator.id);
+    });
+
+    // Atualiza apenas o elemento pai do colaborador removido no backend
+    vm.updateColaborator(colaborator.parentId, { subordinates: vm.colaborators });
+};
+
 
 
   vm.createColaborator = function (colaboratorData) {
