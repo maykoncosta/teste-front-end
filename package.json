@@ -380,8 +380,7 @@
     "run-sequence": "2.2.0"
   },
   "scripts": {
-    "start": "node app/config/app.js",
-    "dev": "gulp dev"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",

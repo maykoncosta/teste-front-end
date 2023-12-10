@@ -1,14 +1,24 @@
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.enable-subordinate-btn {
     cursor: pointer;
     font-size: 20px !important;
     margin-right: 5px;
+    margin-left: 5px;
+    transition: color 0.3s ease;  /* Adiciona uma transição de cor de 0.3 segundos */
 }
 
-.delete-btn {
-    color: #D90A0A;
+.edit-btn:hover {
+    color: #1E90FF; /* Cor desejada ao passar o mouse sobre o botão de edição */
 }
 
+.delete-btn:hover {
+    color: #FF6347; /* Cor desejada ao passar o mouse sobre o botão de exclusão */
+}
+
+.enable-subordinate-btn:hover {
+    color: #32CD32; /* Cor desejada ao passar o mouse sobre o botão de adicionar subordinado */
+}
 
 .force-pass-level-1,
 .force-pass-level-2,
@@ -40,7 +50,7 @@
 .score {
     border-radius: 15px;
     background-color: #FFF;
-    width: 70px;
+    width: 55px;
     text-align: center;
     height: 21px;
     color: #222222;
@@ -57,7 +67,7 @@
     background: #222;
     border-radius: 20px;
     padding: 10px;
-    min-width: 350px;
+    min-width: 90vh;
     border-bottom: 1px solid;
 }
 

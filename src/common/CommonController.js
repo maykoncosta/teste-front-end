@@ -7,6 +7,7 @@ function CommonController(CommonService) {
   vm.titleHeader = "MEDIR SENHAS DOS COLABORADORES";
   vm.formData = {};
   vm.colaborators = [];
+  vm.subordinates = [];
   vm.showLeadInput = false;
 
   vm.submitForm = function () {
@@ -35,40 +36,28 @@ function CommonController(CommonService) {
   };
 
   vm.editColaborator = function (colaborator) {
-    vm.formData = angular.copy(colaborator);
+    vm.formData = colaborator;
   };
 
   vm.addSubordinate = function () {
     const newSubordinate = {
-        name: vm.formData.name,
-        password: vm.formData.password,
+      name: vm.formData.name,
+      password: vm.formData.password,
+      leadId: vm.formData.leadId,
+      id: "SUBORDINATE"
     };
 
-    const liderId = vm.formData.leadId;
-    const colaboratorLead = vm.colaborators.find(colaborator => colaborator.id === liderId);
+    vm.updateColaborator(newSubordinate.id, newSubordinate);
 
-    if (colaboratorLead) {
-      if(colaboratorLead.subordinates){
-        colaboratorLead.subordinates.push(newSubordinate);
-      }else{
-        colaboratorLead.subordinates = [newSubordinate];
-      }
-
-        vm.updateColaborator(colaboratorLead.id, colaboratorLead);
-
-        vm.showSuperiorInput = false;
-        vm.formData.lead = '';
-        vm.formData.leadId = '';
-    } else {
-        console.log('Líder não encontrado.');
-    }
-};
+    vm.showLeadInput = false;
+    vm.formData.lead = '';
+    vm.formData.leadId = '';
+  };
 
   vm.enableSubordinate = function (colaborator) {
     vm.showLeadInput = true;
     vm.formData.lead = colaborator.name;
     vm.formData.leadId = colaborator.id;
-    console.log('aqui')
   };
 
   vm.deleteColaborator = function (colaborator) {
@@ -127,7 +116,10 @@ function CommonController(CommonService) {
   };
 
   vm.init = function () {
-    vm.getColaborators();
+    console.log('init');
+    if (vm.colaborators.length === 0) {
+      vm.getColaborators();
+    }
   };
 
   vm.init();
