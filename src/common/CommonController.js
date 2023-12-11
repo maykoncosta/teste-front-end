@@ -61,33 +61,42 @@ function CommonController(CommonService) {
   };
 
   vm.deleteColaborator = function (colaborator) {
-    // Função recursiva para remover colaborador da árvore de subordinados
-    const removeColaboratorFromSubordinates = function (currentColaborator, colaboratorId) {
-        currentColaborator.subordinates = currentColaborator.subordinates.filter(subordinate => {
-            if (subordinate.id === colaboratorId) {
-                return false; // Remove o colaborador da lista de subordinados
-            } else {
-                // Chama recursivamente para verificar os subordinados do subordinado
-                removeColaboratorFromSubordinates(subordinate, colaboratorId);
-                return true;
-            }
-        });
-    };
-
-    // Remove o colaborador da lista principal
     const index = vm.colaborators.indexOf(colaborator);
     if (index !== -1) {
-        vm.colaborators.splice(index, 1);
+      vm.colaborators.splice(index, 1);
+      CommonService
+        .deleteColaborator(colaborator.id)
+        .then(() => {
+          vm.getColaborators();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      const removeColaboratorFromSubordinates = function (currentColaborator, colaboratorId) {
+        currentColaborator.subordinates = currentColaborator.subordinates.filter(subordinate => {
+          if (subordinate.id === colaboratorId) {
+            return false; 
+          } else {
+            removeColaboratorFromSubordinates(subordinate, colaboratorId);
+            return true;
+          }
+        });
+      };
+
+      vm.colaborators.forEach(otherColaborator => {
+        removeColaboratorFromSubordinates(otherColaborator, colaborator.id);
+      });
+
+      vm.colaborators.forEach(updatedColaborator => {
+        updatedColaborator.subordinateRemoved =colaborator.id;
+        console.log(updatedColaborator);
+        vm.updateColaborator(updatedColaborator.id, updatedColaborator);
+      });
     }
 
-    // Chama a função recursiva para remover da árvore de subordinados dos outros colaboradores
-    vm.colaborators.forEach(otherColaborator => {
-        removeColaboratorFromSubordinates(otherColaborator, colaborator.id);
-    });
 
-    // Atualiza apenas o elemento pai do colaborador removido no backend
-    vm.updateColaborator(colaborator.parentId, { subordinates: vm.colaborators });
-};
+  };
 
 
 

@@ -15,11 +15,27 @@
     flex-direction: row-reverse;
     align-items: center;
 }
-.text-footer{
-    color: #23C4AC;
+
+.text-footer {
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 }
+
+.text-footer a {
+    color: #23C4AC;
+    text-decoration: none; /* Remove sublinhado padrão */
+    transition: color 0.3s, font-size 0.3s; /* Adiciona uma transição suave de cor e tamanho da fonte */
+}
+
+.text-footer a:hover {
+    color: #FA8500; /* Cor ao passar o mouse */
+    font-size: 18px; /* Tamanho da fonte ao passar o mouse */
+}
+
+.fa{
+    font-size: 20px;
+}
+
